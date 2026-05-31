@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>Bulk.Log</title>
+<meta name="theme-color" content="#0c0d0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bulk.Log">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACm0lEQVR4nO3bQWobQRBAUTlkaceXyrFzqeQEWQSCFv5iBJ7pavPeSmjVVXzGbsl+eX17v8FHvq0+AHOJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQO0vfVB/jYrz+//734+eP9/vW6E32mXaab+OT4v6+D7+9lo+nGxfF4RwM3+JS9ppsVx5HtTNvgcdtNNyiO43sZtcGDdpxuUBxMIw6SOEgXfc6xy81+plXbu+LJsdHNfqCF2zs9jr1u9tOs3d65cWx3sx9l+fZOjGPHm/0cE7bntkISB0kcJHGQxEESB2nKnwk++zng17j9Dp/Ok4MkDpI4SOIgiYMkDpI4SOIgiYMkDpI4SOIgiYMkDtKUr+zv/5fr4PvnH+ozPTvdhG/tPTlI4iCJgyQOkjhI4iCdGMfx2+Z299ILTNjeuU+OI+dWRlm+vdN/rDw+vTIeW7u9K37nqBmUccTC7V308fn9JJp41qrtua2QxEESB2lQHBNu9ufZcbpBcdwG3OxPtd10s+K4rb7Zn22v6cbFcfvqn4tsNN3L69u4MzHExCcHQ4iDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImD9Be5+5dgw3/DIAAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACm0lEQVR4nO3bQWobQRBAUTlkaceXyrFzqeQEWQSCFv5iBJ7pavPeSmjVVXzGbsl+eX17v8FHvq0+AHOJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQO0vfVB/jYrz+//734+eP9/vW6E32mXaab+OT4v6+D7+9lo+nGxfF4RwM3+JS9ppsVx5HtTNvgcdtNNyiO43sZtcGDdpxuUBxMIw6SOEgXfc6xy81+plXbu+LJsdHNfqCF2zs9jr1u9tOs3d65cWx3sx9l+fZOjGPHm/0cE7bntkISB0kcJHGQxEESB2nKnwk++zng17j9Dp/Ok4MkDpI4SOIgiYMkDpI4SOIgiYMkDpI4SOIgiYMkDtKUr+zv/5fr4PvnH+ozPTvdhG/tPTlI4iCJgyQOkjhI4iCdGMfx2+Z299ILTNjeuU+OI+dWRlm+vdN/rDw+vTIeW7u9K37nqBmUccTC7V308fn9JJp41qrtua2QxEESB2lQHBNu9ufZcbpBcdwG3OxPtd10s+K4rb7Zn22v6cbFcfvqn4tsNN3L69u4MzHExCcHQ4iDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImD9Be5+5dgw3/DIAAAAABJRU5ErkJggg==">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&family=Space+Mono:wght@700&display=swap');
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;}
+:root{--volt:#c8ff00;}
+html,body{background:#0c0d0f;}
+body{font-family:'Manrope',sans-serif;color:#e9ebee;}
+.lc{background:radial-gradient(120% 80% at 50% -10%,#1a1d12 0%,#0c0d0f 55%);min-height:100vh;
+  padding:calc(22px + env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom));}
+.wrap{max-width:460px;margin:0 auto;}
+.display{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;}
+.mono{font-family:'Space Mono',monospace;}
+.card{background:#16181c;border:1px solid #26292e;border-radius:18px;}
+.wk{min-width:46px;padding:9px 0;border-radius:12px;text-align:center;cursor:pointer;flex:0 0 auto;
+  background:#1d2025;border:1px solid #2c3036;color:#cdd2d8;font-family:'Bebas Neue',sans-serif;font-size:20px;}
+.wk.on{background:var(--volt);color:#0c0d0f;border-color:var(--volt);}
+.wk.dl{border-color:#3a3f47;}
+.chip{background:#1d2025;border:1px solid #2c3036;color:#cdd2d8;border-radius:12px;padding:12px 0;
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em;cursor:pointer;text-align:center;}
+.chip.on{background:var(--volt);color:#0c0d0f;border-color:var(--volt);}
+.ctrl{width:64px;height:64px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  border:1px solid #2c3036;background:#1d2025;color:#e9ebee;cursor:pointer;}
+.go{background:var(--volt);color:#0c0d0f;border-color:var(--volt);}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;}
+.tabbar{position:fixed;left:0;right:0;bottom:0;background:#101216ee;backdrop-filter:blur(10px);
+  border-top:1px solid #26292e;display:flex;padding:8px 10px calc(18px + env(safe-area-inset-bottom));gap:6px;}
+.tabbtn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;
+  color:#6b7280;font-size:11px;font-weight:700;padding:6px 0;cursor:pointer;font-family:'Manrope',sans-serif;}
+.tabbtn.on{color:var(--volt);}
+.scroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+.scroll::-webkit-scrollbar{display:none;}
+input{font-family:'Space Mono',monospace;}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.logInp{width:62px;padding:8px 6px;background:#0f1115;border:1px solid #2c3036;border-radius:10px;color:#fff;
+  font-size:14px;font-family:'Space Mono',monospace;outline:none;text-align:center;}
+.inp{width:100%;margin-top:5px;padding:11px 12px;background:#0f1115;border:1px solid #2c3036;border-radius:12px;
+  color:#fff;font-size:16px;font-family:'Space Mono',monospace;outline:none;}
+svg{display:block;}
+</style>
+</head>
+<body>
+<div class="lc"><div class="wrap" id="app"></div></div>
+<div class="tabbar" id="tabbar"></div>
+<script>
+var VOLT="#c8ff00";
+var START=new Date(2026,5,1);
+var DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function addDays(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
+function fmtD(d){return DOW[d.getDay()]+" "+d.getDate()+" "+MON[d.getMonth()];}
+function dayKey(d){return d.toISOString().slice(0,10);}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
+function today(){return new Date().toISOString().slice(0,10);}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function curWeek(){var t=new Date(today());return clamp(Math.floor((t-START)/(7*864e5)),0,11);}
+var TRAIN={0:0,2:1,3:2,4:3,5:4};
+
+var DAYS=[
+ {title:"UPPER",tag:"Push + Pull",ex:[
+  ["Incline Barbell Bench",4,"5–7","RPE 8","2–3 min",true],["Weighted Pull-up / Pulldown",4,"6–9","RPE 8","2 min",true],
+  ["Seated DB Shoulder Press",3,"8–10","RPE 8","2 min",false],["Chest-Supported Row",3,"9–12","RPE 8","90 s",false],
+  ["Lateral Raise",4,"12–20","RPE 9","45 s",false],["EZ-Bar Curl",3,"8–12","RPE 9","60 s",false],
+  ["Triceps Pushdown",3,"10–15","RPE 9","60 s",false]]},
+ {title:"LOWER A",tag:"Quad + Calves",ex:[
+  ["Back Squat",4,"4–6","RPE 8","3 min",true],["Hack Squat / Leg Press",3,"8–12","RPE 8","2 min",true],
+  ["Bulgarian Split Squat",3,"8–10/leg","RPE 8","90 s",false],["Leg Extension",3,"12–15","RPE 9","60 s",false],
+  ["Standing Calf Raise",5,"8–12","RPE 8","60 s",false],["Seated Calf Raise",4,"12–20","RPE 8","60 s",false]]},
+ {title:"PUSH",tag:"Chest · Delts · Tris",ex:[
+  ["Flat Barbell Bench",4,"6–8","RPE 8","2–3 min",true],["Standing Overhead Press",3,"6–9","RPE 8","2 min",true],
+  ["Incline DB Press",3,"8–12","RPE 8","90 s",false],["Cable Lateral Raise",4,"12–20","RPE 9","45 s",false],
+  ["Overhead Triceps Ext (A1)",3,"10–14","RPE 9","30 s",false],["Triceps Pushdown (A2)",3,"12–15","RPE 9","60 s",false]]},
+ {title:"LOWER B",tag:"Ham/Glute + Calves",ex:[
+  ["Romanian Deadlift",4,"6–8","RPE 8","3 min",true],["Front Squat / Leg Press",3,"8–12","RPE 8","2 min",true],
+  ["Lying Leg Curl",4,"10–15","RPE 9","90 s",false],["Walking Lunge",3,"10–12/leg","RPE 8","90 s",false],
+  ["Standing/Donkey Calf Raise",4,"10–15","RPE 8","60 s",false],["Single-Leg Calf Raise",2,"12–15/leg","RPE 9","45 s",false]]},
+ {title:"PULL",tag:"Back · Bis · Calves",ex:[
+  ["Barbell Row",4,"6–9","RPE 8","2 min",true],["Weighted Pull-up / Pulldown",4,"6–10","RPE 8","2 min",true],
+  ["Seated Cable Row",3,"10–12","RPE 8","90 s",false],["Face Pull",3,"15–20","RPE 8","45 s",false],
+  ["Barbell Curl (A1)",3,"8–12","RPE 9","30 s",false],["Incline DB Curl (A2)",3,"10–12","RPE 9","60 s",false],
+  ["Seated Calf Raise",4,"12–20","RPE 8","60 s",false]]}
+];
+
+var WEEKS=[
+ {phase:"Accumulation",sub:"Week 1 of 3",note:"Base week — set the loads the whole first block is measured against.",tips:[
+  "On each lift, pick a weight you could do for about 2 reps past the top of the rep range. Stop 2–3 reps shy of failure (≈RPE 7–8).",
+  "Log every set honestly — these numbers are your reference point for weeks 2 and 3.",
+  "Full range of motion and a controlled lowering on everything. No ego loading this week."]},
+ {phase:"Accumulation",sub:"Week 2 of 3",note:"Progress on week 1 — small, repeatable jumps.",tips:[
+  "Use ⟳ copy last week, then beat it: +1 rep on each set, or +2.5kg anywhere you hit the top of the range.",
+  "Keep ~2 reps in reserve on the main lifts; isolation work can run closer to failure.",
+  "If a load drops your reps below the range, it's too heavy — pull it back."]},
+ {phase:"Accumulation",sub:"Week 3 · Overreach",note:"Hardest week of block 1. Main lifts get an extra set automatically.",tips:[
+  "Take top sets to RPE 8–9 — one to two reps left in the tank.",
+  "Add reps before adding load; only load up once you're at the top of the range.",
+  "You should feel beaten up by the weekend. That's the signal the deload is doing its job next week."],over:true},
+ {phase:"Deload",sub:"Recover",note:"Planned recovery. Sets are auto-cut ~40% and everything caps at RPE 6.",tips:[
+  "Use roughly 60–70% of your week-3 working weights. Move fast and clean, stop well short of failure.",
+  "This week you're absorbing the block, not adding to it — resist the urge to push.",
+  "Prioritise sleep, calories, and easy steps. Recovery is the training this week."],deload:true},
+ {phase:"Hypertrophy",sub:"Week 1 of 3",note:"New block, fresh progression run — target more total volume than block 1.",tips:[
+  "Back to RPE 8, but start slightly heavier than your week-2 loads.",
+  "Re-establish your working sets and reps, then chase them upward over the next three weeks.",
+  "Same exercises, so last week's logged numbers still guide you."]},
+ {phase:"Hypertrophy",sub:"Week 2 of 3",note:"Build on week 5 — reps first, then load.",tips:[
+  "Aim to beat last week on at least the first set of every exercise.",
+  "Controlled tempo: 1–2s down, no bouncing — especially calves, curls, and lateral raises.",
+  "Chase a pump on the isolation work; that's where most of the size is added."]},
+ {phase:"Hypertrophy",sub:"Week 3 · Overreach",note:"Peak of block 2. Mains get an extra set again.",tips:[
+  "Top sets to RPE 9 — leave one rep. Push the accessories hard.",
+  "Total weekly volume should be the highest it's been. Expect real fatigue by Saturday.",
+  "Empty the tank — a deload follows, so there's nothing to save it for."],over:true},
+ {phase:"Deload",sub:"Recover",note:"Second deload. Volume auto-cut, RPE 6, lighter loads.",tips:[
+  "Drop to ~60–70% of week-7 loads and keep every set comfortable.",
+  "If a joint or tendon is grumpy, swap into a pain-free variation for the week.",
+  "Sleep and food still come first — you're setting up the heaviest block next."],deload:true},
+ {phase:"Intensification",sub:"Week 1 of 3",note:"Heaviest block. The focus shifts from volume to load.",tips:[
+  "Work the lower end of each rep range (e.g. 4–6 instead of 6–8) at RPE 8–9.",
+  "Take the full rest on main lifts — up to 3 min — so the loads stay heavy.",
+  "Getting stronger here raises your working weights on everything afterwards."]},
+ {phase:"Intensification",sub:"Week 2 of 3",note:"Add load where last week felt solid.",tips:[
+  "Small jumps only — 2.5kg on a lift is plenty at this intensity.",
+  "Keep accessories at moderate reps; don't let extra fatigue tank your heavy sets.",
+  "Warm up thoroughly before top sets now that loads are high."]},
+ {phase:"Peak",sub:"Hardest week",note:"The hardest week of the program. Mains get an extra set.",tips:[
+  "Top sets to RPE 9–9.5. A grind is fine as long as form holds — no breakdown.",
+  "This is the payoff week; everything before it built to these loads.",
+  "Get it done and the taper is your reward."],over:true},
+ {phase:"Deload / Taper",sub:"Reassess",note:"Light week to recover and take stock before the next cycle.",tips:[
+  "Reduced volume at RPE 6 — sharpen up, don't dig a new hole.",
+  "If you feel fresh, re-test a key lift or two (squat, bench, RDL, row) for a new working max.",
+  "Review the Weigh-in tab — a lean bulk should show roughly +0.5–1kg per month.",
+  "Plan your next block: set starting loads to match where you finished here."],deload:true}
+];
+
+function setsFor(base,isMain,wk){return wk.deload?Math.max(2,base-2):base+((wk.over&&isMain)?1:0);}
+function weekOfDate(ds){var diff=Math.floor((new Date(ds)-START)/(7*864e5));return (diff>=0&&diff<12)?diff+1:null;}
+
+function load(k,def){try{var v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch(e){return def;}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+
+var state={tab:"program",selWeek:curWeek(),open:null,
+  lifts:load("bulklog_lifts",{}),bw:load("bulklog_bw",[]),
+  timer:{total:90,left:90,running:false},bwDate:today()};
+
+var app=document.getElementById("app");
+var tabbar=document.getElementById("tabbar");
+var timerInterval=null,audioCtx=null;
+
+/* ---------- Program ---------- */
+function progHTML(){
+  var sel=state.selWeek,wk=WEEKS[sel],tk=today(),h="";
+  h+='<div class="scroll" style="margin-bottom:14px">';
+  for(var i=0;i<12;i++){h+='<div class="wk '+(sel===i?"on":"")+' '+(WEEKS[i].deload?"dl":"")+'" data-action="week" data-week="'+i+'">'+(i+1)+'</div>';}
+  h+='</div>';
+  h+='<div class="card" style="padding:18px;margin-bottom:14px;border-color:'+(wk.deload?"#3a3f47":"#2c3036")+'">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:baseline">';
+  h+='<div class="display" style="font-size:26px;color:'+(wk.deload?"#9aa1a9":VOLT)+'">WEEK '+(sel+1)+' · '+wk.phase.toUpperCase()+'</div>';
+  h+='<div style="font-size:12px;color:#6b7280;font-weight:700">'+esc(wk.sub)+'</div></div>';
+  h+='<p style="margin:8px 0 0;font-size:13.5px;color:#aeb4bb;line-height:1.5">'+esc(wk.note)+'</p>';
+  if(wk.tips){h+='<div style="margin-top:11px;padding-top:11px;border-top:1px solid #23262b">';
+    for(var t=0;t<wk.tips.length;t++){h+='<div style="display:flex;gap:9px;font-size:12.5px;color:#9aa1a9;line-height:1.45;margin-top:'+(t?8:0)+'px">'+
+      '<span style="color:'+VOLT+';flex:0 0 auto">▸</span><span>'+esc(wk.tips[t])+'</span></div>';}
+    h+='</div>';}
+  h+='</div>';
+  for(var off=0;off<7;off++){
+    var date=addDays(START,sel*7+off),di=TRAIN[off],isT=dayKey(date)===tk;
+    if(di===undefined){
+      h+='<div style="display:flex;align-items:center;gap:10px;padding:10px 16px;opacity:.5">'+
+        '<span style="font-size:13px;font-weight:700;color:'+(isT?VOLT:"#6b7280")+';width:90px">'+fmtD(date)+'</span>'+
+        '<span style="font-size:12px;color:#6b7280;letter-spacing:.1em">REST DAY</span></div>';
+      continue;
+    }
+    var day=DAYS[di],isOpen=state.open===off;
+    h+='<div class="card" style="margin-bottom:10px;overflow:hidden;border-color:'+(isT?VOLT:"#26292e")+'">';
+    h+='<div data-action="day" data-off="'+off+'" style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer">';
+    h+='<div><div style="display:flex;align-items:center;gap:9px"><span class="display" style="font-size:21px">'+day.title+'</span>';
+    if(isT)h+='<span class="pill" style="background:'+VOLT+';color:#0c0d0f;font-size:10px">TODAY</span>';
+    h+='</div><div style="font-size:12px;color:#6b7280;margin-top:2px">'+fmtD(date)+' · '+day.tag+'</div></div>';
+    h+='<span style="color:#6b7280;font-size:15px">'+(isOpen?"–":"+")+'</span></div>';
+    if(isOpen){
+      h+='<div style="padding:0 8px 8px">';
+      for(var j=0;j<day.ex.length;j++){
+        var e=day.ex[j],key=sel+"|"+di+"|"+e[0],raw=state.lifts[key],arr=Array.isArray(raw)?raw:[];
+        var praw=state.lifts[(sel-1)+"|"+di+"|"+e[0]],prev=Array.isArray(praw)?praw:[];
+        var nSets=setsFor(e[1],e[5],wk),hasPrev=prev.some(function(x){return x&&(x.kg||x.reps);});
+        h+='<div style="border-top:1px solid #1f2226;padding:10px 8px 12px">';
+        h+='<div style="display:flex;align-items:center;font-size:13.5px">'+
+           '<span style="flex:1">'+esc(e[0])+'</span>'+
+           '<span class="mono" style="width:70px;text-align:right">'+nSets+' × '+e[2]+'</span>'+
+           '<span style="width:42px;text-align:right;color:#6b7280;font-size:12px">'+(wk.deload?"RPE 6":e[3])+'</span>'+
+           '<span class="pill" style="margin-left:8px;background:#1d2025;color:'+VOLT+';padding:3px 8px">'+e[4]+'</span></div>';
+        if(hasPrev){h+='<div style="text-align:right;margin-top:5px"><span data-action="copy" data-key="'+esc(key)+'" data-n="'+nSets+'" '+
+          'style="font-size:11px;color:'+VOLT+';cursor:pointer;font-weight:700">⟳ copy last week</span></div>';}
+        h+='<div style="margin-top:6px">';
+        for(var s=0;s<nSets;s++){
+          var cur=arr[s]||{},ps=prev[s],showPrev=ps&&(ps.kg||ps.reps);
+          h+='<div style="display:flex;align-items:center;gap:7px;padding:3px 0">'+
+             '<span style="width:26px;font-size:11px;color:#6b7280;font-weight:700">S'+(s+1)+'</span>'+
+             '<input class="logInp setin" type="number" inputmode="decimal" placeholder="kg" data-key="'+esc(key)+'" data-idx="'+s+'" data-field="kg" value="'+(cur.kg!=null?esc(cur.kg):"")+'">'+
+             '<span style="color:#5a6068;font-size:13px">×</span>'+
+             '<input class="logInp setin" type="number" inputmode="numeric" placeholder="reps" data-key="'+esc(key)+'" data-idx="'+s+'" data-field="reps" value="'+(cur.reps!=null?esc(cur.reps):"")+'">'+
+             '<span style="flex:1"></span>'+
+             (showPrev?'<span style="font-size:11.5px;color:#6b7280;white-space:nowrap">last <span style="color:#9aa1a9;margin-left:4px">'+esc(ps.kg||"–")+'×'+esc(ps.reps||"–")+'</span></span>':'')+
+             '</div>';
+        }
+        h+='</div></div>';
+      }
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+  h+='<p style="font-size:11.5px;color:#6b7280;text-align:center;margin-top:8px">Drive progression by beating last week within each rep range, then adding load. Overreach weeks add a set to main lifts; deloads cut it back.</p>';
+  return h;
+}
+
+/* ---------- Timer ---------- */
+var PRESETS=[["0:30",30],["0:45",45],["1:00",60],["1:30",90],["2:00",120],["3:00",180]];
+function timerHTML(){
+  var tm=state.timer,R=120,C=2*Math.PI*R,prog=tm.total>0?tm.left/tm.total:0;
+  var h='<div class="card" style="padding:24px;margin-bottom:14px">';
+  h+='<div style="position:relative;width:280px;height:280px;margin:4px auto 8px">';
+  h+='<svg width="280" height="280" style="transform:rotate(-90deg)">'+
+     '<circle cx="140" cy="140" r="'+R+'" fill="none" stroke="#23262b" stroke-width="14"/>'+
+     '<circle id="tring" cx="140" cy="140" r="'+R+'" fill="none" stroke="'+VOLT+'" stroke-width="14" stroke-linecap="round" '+
+     'stroke-dasharray="'+C+'" stroke-dashoffset="'+(C*(1-prog))+'" style="transition:stroke-dashoffset .98s linear"/></svg>';
+  h+='<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">'+
+     '<div id="tt" class="mono" style="font-size:56px;color:'+(tm.left===0?VOLT:"#fff")+';line-height:1">'+fmt(tm.left)+'</div>'+
+     '<div id="tstate" class="display" style="font-size:16px;color:#6b7280;margin-top:6px;letter-spacing:.15em">'+(tm.running?"RESTING":tm.left===0?"GO LIFT":"READY")+'</div></div>';
+  h+='</div>';
+  h+='<div style="display:flex;justify-content:center;gap:18px;margin:10px 0 22px">'+
+     '<button class="ctrl" data-action="treset">⟲</button>'+
+     '<button class="ctrl go" data-action="ttoggle" style="font-size:24px">'+(tm.running?"❙❙":"►")+'</button></div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px">';
+  for(var i=0;i<PRESETS.length;i++){h+='<div class="chip '+(tm.total===PRESETS[i][1]?"on":"")+'" data-action="preset" data-s="'+PRESETS[i][1]+'">'+PRESETS[i][0]+'</div>';}
+  h+='</div>';
+  h+='<p style="font-size:12px;color:#6b7280;text-align:center;margin-top:16px">Tap a preset to start. Compounds 2–3 min · isolation 45–90 s · supersets 60 s after the pair.</p>';
+  h+='</div>';
+  return h;
+}
+function updateTimerDOM(){
+  var tm=state.timer,tt=document.getElementById("tt");if(!tt)return;
+  var R=120,C=2*Math.PI*R,prog=tm.total>0?tm.left/tm.total:0;
+  tt.textContent=fmt(tm.left);tt.style.color=tm.left===0?VOLT:"#fff";
+  document.getElementById("tstate").textContent=tm.running?"RESTING":tm.left===0?"GO LIFT":"READY";
+  var ring=document.getElementById("tring");if(ring)ring.setAttribute("stroke-dashoffset",C*(1-prog));
+  var tog=document.querySelector('[data-action=ttoggle]');if(tog)tog.textContent=tm.running?"❙❙":"►";
+}
+function startTick(){stopTick();timerInterval=setInterval(function(){
+  if(state.timer.left<=1){state.timer.left=0;state.timer.running=false;stopTick();beep();updateTimerDOM();}
+  else{state.timer.left--;updateTimerDOM();}},1000);}
+function stopTick(){if(timerInterval){clearInterval(timerInterval);timerInterval=null;}}
+function ensureAudio(){if(!audioCtx){try{audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+  if(audioCtx&&audioCtx.state==="suspended")audioCtx.resume();}
+function beep(){var ctx=audioCtx;if(!ctx)return;[0,0.18,0.36].forEach(function(t){
+  var o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type="sine";o.frequency.value=880;
+  var st=ctx.currentTime+t;g.gain.setValueAtTime(0.0001,st);g.gain.exponentialRampToValueAtTime(0.35,st+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,st+0.15);o.start(st);o.stop(st+0.16);});
+  if(navigator.vibrate)navigator.vibrate([120,60,120]);}
+
+/* ---------- Weigh-in ---------- */
+function chartSVG(bw){
+  if(!bw.length)return '<p style="color:#6b7280;text-align:center;padding:30px 0;font-size:14px">Log your first weigh-in to start tracking.</p>';
+  var W=320,H=190,pL=34,pR=12,pT=14,pB=24,n=bw.length;
+  var ks=bw.map(function(e){return e.kg;}),mn=Math.min.apply(null,ks)-1,mx=Math.max.apply(null,ks)+1;
+  if(mx-mn<2){mn-=1;mx+=1;}
+  function X(i){return n===1?(pL+(W-pL-pR)/2):pL+(i/(n-1))*(W-pL-pR);}
+  function Y(v){return pT+(1-(v-mn)/(mx-mn))*(H-pT-pB);}
+  var pts=bw.map(function(e,i){return X(i)+","+Y(e.kg);}).join(" ");
+  var base=Y(bw[0].kg);
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="200" preserveAspectRatio="none">';
+  s+='<line x1="'+pL+'" y1="'+base+'" x2="'+(W-pR)+'" y2="'+base+'" stroke="#3a3f47" stroke-dasharray="4 4"/>';
+  s+='<text x="2" y="'+(Y(mx)+4)+'" fill="#6b7280" font-size="10" font-family="monospace">'+mx.toFixed(0)+'</text>';
+  s+='<text x="2" y="'+(Y(mn)+4)+'" fill="#6b7280" font-size="10" font-family="monospace">'+mn.toFixed(0)+'</text>';
+  if(n>1)s+='<polyline fill="none" stroke="'+VOLT+'" stroke-width="3" points="'+pts+'"/>';
+  bw.forEach(function(e,i){s+='<circle cx="'+X(i)+'" cy="'+Y(e.kg)+'" r="4" fill="'+VOLT+'"/>';});
+  s+='<text x="'+pL+'" y="'+(H-6)+'" fill="#6b7280" font-size="10" font-family="monospace">'+bw[0].date.slice(5)+'</text>';
+  if(n>1)s+='<text x="'+(W-pR)+'" y="'+(H-6)+'" fill="#6b7280" font-size="10" font-family="monospace" text-anchor="end">'+bw[n-1].date.slice(5)+'</text>';
+  s+='</svg>';
+  return s;
+}
+function weightHTML(){
+  var bw=state.bw.slice().sort(function(a,b){return a.date.localeCompare(b.date);}),h="";
+  h+='<div class="card" style="padding:18px;margin-bottom:12px"><div style="display:flex;gap:10px;align-items:flex-end">';
+  h+='<div style="flex:1"><label style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:.08em">WEIGHT (KG)</label>'+
+     '<input id="bwkg" class="inp" type="number" inputmode="decimal" placeholder="72.0"></div>';
+  h+='<div style="flex:1"><label style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:.08em">DATE</label>'+
+     '<input id="bwdate" class="inp" type="date" value="'+esc(state.bwDate)+'"></div>';
+  h+='<button data-action="bwadd" class="inp" style="width:52px;flex:none;display:flex;align-items:center;justify-content:center;background:'+VOLT+';color:#0c0d0f;border:none;font-size:24px;cursor:pointer">+</button>';
+  h+='</div></div>';
+  if(bw.length){
+    var latest=bw[bw.length-1],first=bw[0];
+    var wkC=bw.length>=2?(latest.kg-bw[bw.length-2].kg):null,totC=bw.length>=2?(latest.kg-first.kg):null;
+    function stat(l,v,a){var c=a==null?"#fff":a>0?VOLT:"#ff6b5e";
+      return '<div class="card" style="flex:1;padding:12px 8px;text-align:center"><div style="font-size:10px;color:#6b7280;font-weight:700">'+l+'</div>'+
+      '<div class="mono" style="font-size:18px;margin-top:4px;color:'+c+'">'+v+'</div></div>';}
+    h+='<div style="display:flex;gap:10px;margin-bottom:12px">'+
+       stat("LATEST",latest.kg+" kg",null)+
+       stat("LAST CHANGE",wkC==null?"—":(wkC>0?"+":"")+wkC.toFixed(1),wkC)+
+       stat("TOTAL",totC==null?"—":(totC>0?"+":"")+totC.toFixed(1),totC)+'</div>';
+  }
+  h+='<div class="card" style="padding:18px 10px 10px;margin-bottom:12px">'+
+     '<div class="display" style="font-size:18px;padding-left:8px;letter-spacing:.08em;color:#cdd2d8">BODYWEIGHT TREND</div>'+
+     chartSVG(bw)+
+     '<p style="font-size:11.5px;color:#6b7280;padding:4px 8px 0;margin:0">Lean-bulk target ≈ +0.06 to +0.10 kg/week. Weigh in same time of day, ideally fasted.</p></div>';
+  if(bw.length){
+    h+='<div class="card" style="padding:8px">';
+    for(var i=bw.length-1;i>=0;i--){var e=bw[i],wo=weekOfDate(e.date);
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-bottom:1px solid #1f2226">'+
+         '<span style="display:flex;align-items:center;gap:8px"><span style="color:#9aa1a9;font-size:13px;font-weight:500">'+e.date+'</span>'+
+         (wo?'<span class="pill" style="background:#1d2025;color:#6b7280;font-size:10px">WK '+wo+'</span>':'')+'</span>'+
+         '<span style="display:flex;align-items:center;gap:14px"><span class="mono" style="font-size:16px">'+e.kg+' kg</span>'+
+         '<span data-action="bwdel" data-date="'+e.date+'" style="color:#5a6068;cursor:pointer;font-size:16px">✕</span></span></div>';
+    }
+    h+='</div>';
+  }
+  h+='<div class="card" style="padding:14px 16px;margin-top:12px">'+
+     '<div class="display" style="font-size:16px;letter-spacing:.08em;color:#cdd2d8;margin-bottom:10px">BACKUP</div>'+
+     '<div style="display:flex;gap:10px">'+
+     '<button data-action="export" style="flex:1;padding:11px;background:#1d2025;border:1px solid #2c3036;border-radius:12px;color:#e9ebee;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;cursor:pointer">Export backup</button>'+
+     '<label style="flex:1;padding:11px;background:#1d2025;border:1px solid #2c3036;border-radius:12px;color:#e9ebee;font-family:Manrope,sans-serif;font-weight:700;font-size:13px;text-align:center;cursor:pointer">Import<input id="importFile" type="file" accept=".json,application/json" style="display:none"></label>'+
+     '</div>'+
+     '<p style="font-size:11.5px;color:#6b7280;margin-top:9px;margin-bottom:0">Saves a file with every logged set and weigh-in. Import it after reinstalling or on a new device to restore everything.</p>'+
+     '</div>';
+  return h;
+}
+
+/* ---------- Backup ---------- */
+function exportData(){
+  try{
+    var payload={app:"bulklog",version:1,exported:new Date().toISOString(),lifts:state.lifts,bw:state.bw};
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");a.href=url;a.download="bulklog-backup.json";
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(url);a.remove();},1500);
+  }catch(e){alert("Export failed: "+e.message);}
+}
+function importData(file){
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var d=JSON.parse(r.result);
+      if(d.lifts&&typeof d.lifts==="object")state.lifts=d.lifts;
+      if(Array.isArray(d.bw))state.bw=d.bw;
+      save("bulklog_lifts",state.lifts);save("bulklog_bw",state.bw);
+      render();alert("Backup restored.");
+    }catch(e){alert("Couldn't read that backup file.");}
+  };
+  r.readAsText(file);
+}
+
+/* ---------- Render ---------- */
+function render(){
+  stopTick();
+  var head='<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px">'+
+    '<div class="display" style="font-size:34px;line-height:1">BULK<span style="color:'+VOLT+'">.</span>LOG</div>'+
+    '<div style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:.1em">12 WEEKS · 5-DAY</div></div>';
+  var body=state.tab==="program"?progHTML():state.tab==="timer"?timerHTML():weightHTML();
+  app.innerHTML=head+body;
+  var tabs=[["program","▦","PROGRAM"],["timer","⏱","TIMER"],["weight","⚖","WEIGH-IN"]];
+  tabbar.innerHTML=tabs.map(function(t){return '<button class="tabbtn '+(state.tab===t[0]?"on":"")+'" data-action="tab" data-tab="'+t[0]+'">'+
+    '<span style="font-size:18px">'+t[1]+'</span>'+t[2]+'</button>';}).join("");
+  if(state.tab==="timer"&&state.timer.running)startTick();
+}
+
+/* ---------- Events ---------- */
+document.body.addEventListener("click",function(ev){
+  var el=ev.target.closest("[data-action]");if(!el)return;var a=el.dataset.action;
+  if(a==="tab"){state.tab=el.dataset.tab;render();}
+  else if(a==="week"){state.selWeek=+el.dataset.week;state.open=null;render();}
+  else if(a==="day"){var off=+el.dataset.off;state.open=state.open===off?null:off;render();}
+  else if(a==="copy"){var key=el.dataset.key,n=+el.dataset.n,p=key.split("|");
+    var prevKey=(+p[0]-1)+"|"+p[1]+"|"+p.slice(2).join("|");var prev=state.lifts[prevKey]||[];
+    var nu=[];for(var s=0;s<n;s++){nu.push(Object.assign({},prev[s]||{}));}
+    state.lifts[key]=nu;save("bulklog_lifts",state.lifts);render();}
+  else if(a==="preset"){ensureAudio();state.timer.total=+el.dataset.s;state.timer.left=+el.dataset.s;state.timer.running=true;updateTimerDOM();
+    document.querySelectorAll(".chip").forEach(function(c){c.classList.toggle("on",+c.dataset.s===state.timer.total);});startTick();}
+  else if(a==="ttoggle"){ensureAudio();if(state.timer.left===0)state.timer.left=state.timer.total;state.timer.running=!state.timer.running;
+    if(state.timer.running)startTick();else stopTick();updateTimerDOM();}
+  else if(a==="treset"){state.timer.running=false;stopTick();state.timer.left=state.timer.total;updateTimerDOM();}
+  else if(a==="bwadd"){var kg=parseFloat(document.getElementById("bwkg").value),d=document.getElementById("bwdate").value;
+    if(!kg||!d)return;state.bw=state.bw.filter(function(e){return e.date!==d;});state.bw.push({date:d,kg:kg});
+    state.bw.sort(function(x,y){return x.date.localeCompare(y.date);});save("bulklog_bw",state.bw);render();}
+  else if(a==="bwdel"){var dt=el.dataset.date;state.bw=state.bw.filter(function(e){return e.date!==dt;});save("bulklog_bw",state.bw);render();}
+  else if(a==="export"){exportData();}
+});
+document.body.addEventListener("input",function(ev){var t=ev.target;
+  if(t.classList.contains("setin")){var key=t.dataset.key,idx=+t.dataset.idx,field=t.dataset.field;
+    var arr=Array.isArray(state.lifts[key])?state.lifts[key]:(state.lifts[key]=[]);
+    arr[idx]=Object.assign({},arr[idx]||{});arr[idx][field]=t.value;}
+});
+document.body.addEventListener("change",function(ev){var t=ev.target;
+  if(t.classList.contains("setin"))save("bulklog_lifts",state.lifts);
+  if(t.id==="bwdate")state.bwDate=t.value;
+  if(t.id==="importFile"&&t.files&&t.files[0])importData(t.files[0]);
+});
+
+/* web app manifest (for Android / installability) */
+try{var mani={name:"Bulk.Log",short_name:"Bulk.Log",display:"standalone",background_color:"#0c0d0f",theme_color:"#0c0d0f",start_url:"."};
+var blob=new Blob([JSON.stringify(mani)],{type:"application/json"});var ln=document.createElement("link");
+ln.rel="manifest";ln.href=URL.createObjectURL(blob);document.head.appendChild(ln);}catch(e){}
+
+render();
+</script>
+</body>
+</html>
